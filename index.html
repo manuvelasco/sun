@@ -38,7 +38,7 @@
     </div>
 
     <script type="text/javascript">
-    var w = 320, h = 91;
+    var w = 320, h = 101;
 var t0 = Date.now();
 
 var planets = [
@@ -49,7 +49,7 @@ var svg = d3.select("#planetarium").insert("svg")
     .attr("width", w).attr("height", h);
 
 var container = svg.append("g")
-    .attr("transform", "translate(" + w/2 + "," + 170 + ")");
+    .attr("transform", "translate(" + w/2 + "," + 180 + ")");
 
 container.selectAll("g.planet")
     .data(planets).enter().append("g")
@@ -82,10 +82,31 @@ container.append("image")
     .attr("width", "25px")
     .attr("height", "25px");
 
-d3.select(".imagen")
-    .transition()
-    .attr("transform","rotate(90)")
-    .duration(2000);
+//Valor hora actual
+var valueTime = 13;
+
+
+var valueTimeGrade=0;
+var gradeValue = [0,0,0,0,0,0,42,50,55,60,75,80,90,105,110,115,120,125,140];
+
+//una vez cargado todo el contenido de la pagina
+document.addEventListener('DOMContentLoaded', function() {
+
+    for(i = 6 ; i < 19 ; i++){
+	if(valueTime == i){
+	    valueTimeGrade = gradeValue[i];
+	    break;
+	}
+    }
+    
+    d3.select(".imagen")
+	.transition()
+	.attr("transform","rotate("+ valueTimeGrade +")")
+	.duration(4000);
+
+}, false);
+
+
 
     </script>
 
