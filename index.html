@@ -6,36 +6,28 @@
     <script src="js/d3.v3.min.js"></script>
 
     <style>
-      .orbit {
-      stroke : #000000;
-      fill : none;
-      }
-    .sun {
-      stroke : orange;
-	  fill : yellow;
-    }
+    
     .sun-ini{
 	fill : #F3CD12;
     }
     .sun-fin{
 	fill: #F26E14;
     }
-    .arc{
+    .orbit{
 	stroke : #EDEDED;
-	fill : #EDEDED;
+	fill:none;
     }
 #planetarium{
     background-color: #499dd0;
     color: #ffffff;
-    height: 397px;
-    width: 800px;
+    height: 200px;
+    width: 320px;
 }
 .text-title {
-    font-size: 26px;
+    font-size: 14px;
     font-weight: bold;
-    padding: 29px 0 15px 75px;
+    padding: 13px 0 0 13px;
 }
-
     </style>
 
   </head>
@@ -46,50 +38,18 @@
     </div>
 
     <script type="text/javascript">
-    var w = 800, h = 600;
+    var w = 320, h = 137;
 var t0 = Date.now();
 
 var planets = [
-    { R: 150, r: 10, speed: 2, phi0: 190}
+    { R: 111, r: 10, speed: 2, phi0: 150}
 ];
 
 var svg = d3.select("#planetarium").insert("svg")
     .attr("width", w).attr("height", h);
 
-svg.append("line")
-    .attr("x1", 100)
-    .attr("y1", h/2)
-    .attr("x2", w)
-    .attr("y2", h/2)
-    .attr("stroke-widht", 2)
-    .attr("stroke", "#E6EAEC");
-
 var container = svg.append("g")
-    .attr("transform", "translate(" + w/2 + "," + h/2 + ")");
-
-var arc = d3.svg.arc()
-    .innerRadius(150)
-    .outerRadius(152)
-    .startAngle(180 * (Math.PI/180)) //converting from degs to radians
-    .endAngle(0) //just radians
-
-container.append("path")
-    .attr("class","arc")
-    .attr("d", arc)
-    .attr("transform", "rotate(270)")
-// .attr("transform","scale(1.2)");
-
-container.append("circle")
-    .attr("r", 6)
-    .attr("cx",-151)
-    .attr("cy",0)
-    .attr("class", "sun-ini");
-
-container.append("circle")
-    .attr("r", 6)
-    .attr("cx",151)
-    .attr("cy",0)
-    .attr("class", "sun-fin");
+    .attr("transform", "translate(" + w/2 + "," + 130 + ")");
 
 container.selectAll("g.planet")
     .data(planets).enter().append("g")
@@ -97,13 +57,32 @@ container.selectAll("g.planet")
     .each(function(d, i) {
 
 	d3.select(this).append("circle")
-	    .attr("r", d.r)
-	    .attr("cx",-150)
-	    .attr("cy",0)
-	    .attr("class", "sun");
+	    .attr("class", "orbit")
+	    .attr("r", d.R)
+	    .style("stroke-dasharray", ("10,3"));
     });
 
-d3.select(".sun")
+container.append("circle")
+    .attr("r", 6)
+    .attr("cx",-111)
+    .attr("cy",1)
+    .attr("class", "sun-ini");
+
+container.append("circle")
+    .attr("r", 6)
+    .attr("cx",111)
+    .attr("cy",1)
+    .attr("class", "sun-fin");
+
+container.append("image")
+    .attr("class","imagen")
+    .attr("xlink:href", "images/sun.png")
+    .attr("x", "-123")
+    .attr("y", "-10")
+    .attr("width", "25px")
+    .attr("height", "25px");
+
+d3.select(".imagen")
     .transition()
     .attr("transform","rotate(90)")
     .duration(2000);
