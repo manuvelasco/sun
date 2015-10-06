@@ -38,18 +38,18 @@
     </div>
 
     <script type="text/javascript">
-    var w = 320, h = 137;
+    var w = 320, h = 91;
 var t0 = Date.now();
 
 var planets = [
-    { R: 111, r: 10, speed: 2, phi0: 150}
+    { R: 151, r: 40, speed: 2, phi0: 180}
 ];
 
 var svg = d3.select("#planetarium").insert("svg")
     .attr("width", w).attr("height", h);
 
 var container = svg.append("g")
-    .attr("transform", "translate(" + w/2 + "," + 130 + ")");
+    .attr("transform", "translate(" + w/2 + "," + 170 + ")");
 
 container.selectAll("g.planet")
     .data(planets).enter().append("g")
@@ -64,20 +64,20 @@ container.selectAll("g.planet")
 
 container.append("circle")
     .attr("r", 6)
-    .attr("cx",-111)
-    .attr("cy",1)
+    .attr("cx",-126)
+    .attr("cy",-84.5)
     .attr("class", "sun-ini");
 
 container.append("circle")
     .attr("r", 6)
-    .attr("cx",111)
-    .attr("cy",1)
+    .attr("cx",126)
+    .attr("cy",-84.5)
     .attr("class", "sun-fin");
 
 container.append("image")
     .attr("class","imagen")
     .attr("xlink:href", "images/sun.png")
-    .attr("x", "-123")
+    .attr("x", "-163")
     .attr("y", "-10")
     .attr("width", "25px")
     .attr("height", "25px");
